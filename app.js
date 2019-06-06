@@ -11,11 +11,16 @@ $(document).ready(function() {
     }
 });
 
+function displayLogin(show) {
+    if (show) $('#login').show();
+    else $('#login').hide();
+}
+
 function redrawscreen(refresh) {
     var options = {};
-    options.url = 'https://localhost/zabbix/api_jsonrpc.php';
-    options.username = 'guest';
-    options.password = '';
+    options.url = $('#url').val() + '/api_jsonrpc.php';
+    options.username = $('#username').val();
+    options.password = $('#password').val();
 
     var triggers = [];
     server = new $.jqzabbix(options);
@@ -49,10 +54,12 @@ function redrawscreen(refresh) {
 
     function errorMethod() {
         $('#alertlist').replaceWith('<ul id="alertlist"></ul>');
+        displayLogin(true);
     }
 
     function processTriggers(response, status) {
 
+        if (response.result.length) displayLogin(false); else displayLogin(true);
         var trig = [];
         for (var i = 0; i < response.result.length; i++) {
             triggers[i] = response.result[i];
