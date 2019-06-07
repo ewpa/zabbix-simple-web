@@ -8,14 +8,14 @@
 	<link href="css/app.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<div id="login" style="display:none">
+	<div id="login" style="text-align:center; display:none">
 		<form>
-			<h1>Zabbix Authentication</h2>
+			<h1>Zabbix Authentication</h1>
 			<p>
-				Username <input type="text" id="username" value="guest" id="zabbixUsername" />
-				Password <input type="password" id="password" id="zabbixPassword" />
-				Server <input type="text" id="url" value="/zabbix" id="zabbixURL" /> /api_jsonrpc.php
-				<input type="button" value="Authenticate" onclick="displayLogin(false)" />
+				Username <input type="text" id="username" value="guest" /><br />
+				Password <input type="password" id="password" /><br /><br />
+				<input type="button" value="Authenticate" onclick="displayLogin(false)" /><br /><br />
+				Server<br /><input type="text" id="url" value="/zabbix" /> /api_jsonrpc.php<br />
 			</p>
 		</form>
 	</div>
