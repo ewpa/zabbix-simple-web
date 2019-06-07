@@ -31,11 +31,12 @@ function redrawscreen(refresh) {
                 active: 1,
                 extendoutput: 1,
                 lastChangeSince: 1,
-                limit: 100,
                 filter: {
                     value: '1'
                 },
                 monitored: 1,
+		maintenance: false,
+		withLastEventUnacknowledged: true,
                 only_true: 1,
                 expandData: 1,
                 expandDescription: 1,
@@ -98,7 +99,7 @@ function redrawscreen(refresh) {
 
                     setTimeout(function() {
                         notification.close();
-                    }, 5000);
+                    }, 20000);
 
                     sessionStorage.setItem(notificationid, 1);
                 }
