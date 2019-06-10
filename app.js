@@ -63,7 +63,7 @@ function redrawscreen(refresh) {
 
     function processTriggers(response, status) {
 
-        if (response.result.length) displayLogin(false); else displayLogin(true);
+        if (response.result.length) displayLogin(false);
         var trig = [];
         for (var i = 0; i < response.result.length; i++) {
             triggers[i] = response.result[i];
