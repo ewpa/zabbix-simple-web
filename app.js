@@ -46,6 +46,9 @@ function redrawscreen(refresh) {
                 sortfield: 'priority',
                 sortorder: 'DESC',
             };
+            query.min_severity = $('#minsev').val();
+            if ($('#group').val() != "") query.group = $('#group').val();
+            if ($('#host').val() != "") query.filter = { host: $('#host').val() };
 
             server.sendAjaxRequest('trigger.get', query, processTriggers, errorMethod);
 
