@@ -8,6 +8,14 @@
 	<link href="css/app.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+	<div style="text-align:right">
+		<span id="opts" style="text-align:right; display:none">
+			Min Severity <input type="text" id="minsev" size="1" maxlength="1" value="3" />
+			Group <input type="text" id="group" size="16" value="" />
+			Host <input type="text" id="host" size="16" value="" />
+		</span>
+		<span onClick="$('#opts').fadeToggle(500)">...</span>
+	</div>
 	<div id="login" style="text-align:center; display:none">
 		<form>
 			<h1>Zabbix Authentication</h1>
