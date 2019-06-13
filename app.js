@@ -9,11 +9,59 @@ $(document).ready(function() {
         }
         Notification.requestPermission();
     }
+    populateApplicationIDs();
 });
 
 function displayLogin(show) {
     if (show) $('#login').show();
     else $('#login').hide();
+}
+
+function openMenu() {
+    $('#menuOpen').hide();
+    $('#menuClose').show();
+    $('#opts').show(500);
+}
+
+function closeMenu() {
+    $('#menuOpen').show();
+    $('#menuClose').hide();
+    $('#opts').hide(500);
+    if ($('#app').val() != "") populateApplicationIDs();
+}
+
+var appIDs = [];
+
+function populateApplicationIDs() {
+    var options = {};
+    options.url = $('#url').val() + '/api_jsonrpc.php';
+    options.username = $('#username').val();
+    options.password = $('#password').val();
+
+    appIDs = [];
+    server = new $.jqzabbix(options);
+
+    server.userLogin(null, function() {
+
+        var query = {
+            search: {
+                name: $('#app').val()
+            }
+        };
+        server.sendAjaxRequest('application.get', query, processApplicationIDs, errorMethod);
+
+    },
+    errorMethod);
+
+    function errorMethod() {
+    }
+
+    function processApplicationIDs(response, status) {
+
+        response.result.forEach(function(app) {
+          appIDs.push(app.applicationid);
+        });
+    }
 }
 
 function redrawscreen(refresh) {
@@ -40,7 +88,6 @@ function redrawscreen(refresh) {
                 only_true: 1,
                 expandData: 1,
                 expandDescription: 1,
-                expandExpression: 1,
                 selectHosts: 1,
                 skipDependent: 1,
                 sortfield: 'priority',
@@ -49,6 +96,7 @@ function redrawscreen(refresh) {
             query.min_severity = $('#minsev').val();
             if ($('#group').val() != "") query.group = $('#group').val();
             if ($('#host').val() != "") query.filter = { host: $('#host').val() };
+            if (appIDs.length > 0) query.applicationids = appIDs;
 
             server.sendAjaxRequest('trigger.get', query, processTriggers, errorMethod);
 

@@ -9,12 +9,14 @@
 </head>
 <body>
 	<div style="text-align:right">
-		<span id="opts" style="text-align:right; display:none">
-			Min Severity <input type="text" id="minsev" size="1" maxlength="1" value="3" />
-			Group <input type="text" id="group" size="16" value="" />
-			Host <input type="text" id="host" size="16" value="" />
-		</span>
-		<span onClick="$('#opts').fadeToggle(500)">...</span>
+		<span id="menuOpen" onClick="openMenu()">Menu</span>
+		<span id="menuClose" onClick="closeMenu()" style="display:none">Hide</span>
+		<div id="opts" style="text-align:right; display:none">
+			Min Severity <input type="text" id="minsev" size="16" maxlength="1" value="3" /><br />
+			Group <input type="text" id="group" size="16" value="" /><br />
+			Host <input type="text" id="host" size="16" value="" /><br />
+			Application <input type="text" id="app" size="16" value="" />
+		</div>
 	</div>
 	<div id="login" style="text-align:center; display:none">
 		<form>
